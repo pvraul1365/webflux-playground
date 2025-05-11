@@ -22,7 +22,7 @@ class TradictionalWebController {
     @GetMapping("products")
     fun getProducts(): List<Product>? {
         val list = restClient.get()
-            .uri("/demo01/products")
+            .uri("/demo01/products/notorious")
             .retrieve()
             .body(object: ParameterizedTypeReference<List<Product>>() {})
 
@@ -30,5 +30,7 @@ class TradictionalWebController {
 
         return list
     }
+
+
 
 }

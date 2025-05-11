@@ -21,9 +21,10 @@ class ReactiveWebController {
     @GetMapping("products")
     fun getProducts(): Flux<Product> {
         return this.webClient.get()
-            .uri("/demo01/products")
+            .uri("/demo01/products/notorious")
             .retrieve()
             .bodyToFlux(Product::class.java)
+            .onErrorComplete()
             .doOnNext {
                 logger.info("received: $it")
             }
