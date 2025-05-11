@@ -1,6 +1,7 @@
 package com.rperezv.webflux_playground.sec01
 
 import mu.KLogging
+import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -19,6 +20,18 @@ class ReactiveWebController {
 
     @GetMapping("products")
     fun getProducts(): Flux<Product> {
+        return this.webClient.get()
+            .uri("/demo01/products")
+            .retrieve()
+            .bodyToFlux(Product::class.java)
+            .doOnNext {
+                logger.info("received: $it")
+            }
+
+    }
+
+    @GetMapping("products/stream", produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
+    fun getProductsStream(): Flux<Product> {
         return this.webClient.get()
             .uri("/demo01/products")
             .retrieve()
