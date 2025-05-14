@@ -16,6 +16,21 @@ class Lec01CustomerRepositoryTest() : AbstractTest() {
     lateinit var customerRepository: CustomerRepository
 
     @Test
+    fun updateCustomer() {
+        val updatedName = "noel"
+        customerRepository.findByName("ethan")
+            .doOnNext { c -> c.name = updatedName }
+            .flatMap { c -> customerRepository.save(c) }
+            .doOnNext { c -> logger.info("updatedCustomer: $c") }
+            .let { StepVerifier.create(it) }
+            .assertNext { c ->
+                Assertions.assertEquals(updatedName, c.name)
+            }
+            .expectComplete()
+            .verify()
+    }
+
+    @Test
     fun findAllTest() {
         val flux = customerRepository.findAll()
 

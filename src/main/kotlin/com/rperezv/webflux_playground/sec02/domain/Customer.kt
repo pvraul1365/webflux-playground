@@ -8,7 +8,7 @@ data class Customer(
 
     @Id
     val id: String? = null,
-    val name: String,
-    val email: String
+    var name: String,
+    var email: String
 
 )
