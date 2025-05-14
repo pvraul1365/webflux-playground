@@ -11,6 +11,8 @@ interface CustomerRepository : ReactiveMongoRepository<Customer, String> {
 
     fun findByEmail(email: String): Mono<Customer>
 
+    fun findByEmailEndingWith(email: String): Flux<Customer>
+
     fun findByName(name: String): Flux<Customer>
 
 }

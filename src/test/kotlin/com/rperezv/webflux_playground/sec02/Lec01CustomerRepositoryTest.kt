@@ -1,5 +1,6 @@
 package com.rperezv.webflux_playground.sec02
 
+import com.rperezv.webflux_playground.sec02.domain.Customer
 import com.rperezv.webflux_playground.sec02.repository.CustomerRepository
 import mu.KLogging
 import org.junit.jupiter.api.Assertions
@@ -64,6 +65,40 @@ class Lec01CustomerRepositoryTest() : AbstractTest() {
                 Assertions.assertEquals("mike", c.name)
                 Assertions.assertEquals("mike@gmail.com", c.email)
             }
+            .expectComplete()
+            .verify()
+    }
+
+    @Test
+    fun findByEmailEndingWith() {
+        val flux = customerRepository.findByEmailEndingWith("ke@gmail.com")
+
+        flux.doOnNext { c -> logger.info("$c") }
+            .let { StepVerifier.create(it) }
+            .assertNext { c ->
+                Assertions.assertEquals("mike", c.name)
+                Assertions.assertEquals("mike@gmail.com", c.email)
+            }
+            .assertNext { c ->
+                Assertions.assertEquals("jake", c.name)
+                Assertions.assertEquals("jake@gmail.com", c.email)
+            }
+            .expectComplete()
+            .verify()
+    }
+
+    @Test
+    fun insertAndDeleteCustomer() {
+        val customer = Customer(null, "marshal", "marshall@gmail.com")
+
+        customerRepository.save(customer)
+            .doOnNext { c -> logger.info("savedCustomer: $c") }
+            .flatMap { savedCustomer ->
+                customerRepository.deleteById(savedCustomer.id!!)
+                    .then(customerRepository.findById(savedCustomer.id!!))
+            }
+            .let { StepVerifier.create(it) }
+            .expectNextCount(0)
             .expectComplete()
             .verify()
     }
