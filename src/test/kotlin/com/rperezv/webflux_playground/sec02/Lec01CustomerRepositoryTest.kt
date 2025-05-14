@@ -17,8 +17,8 @@ class Lec01CustomerRepositoryTest() : AbstractTest() {
 
     @Test
     fun updateCustomer() {
-        val updatedName = "noel"
-        customerRepository.findByName("ethan")
+        val updatedName = "ethan"
+        customerRepository.findByName("noel")
             .doOnNext { c -> c.name = updatedName }
             .flatMap { c -> customerRepository.save(c) }
             .doOnNext { c -> logger.info("updatedCustomer: $c") }

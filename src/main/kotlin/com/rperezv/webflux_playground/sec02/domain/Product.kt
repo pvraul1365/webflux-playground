@@ -8,7 +8,7 @@ data class Product(
 
     @Id
     val id: String? = null,
-    val description: String,
-    val price: Int
+    var description: String,
+    var price: Int
 
 )
