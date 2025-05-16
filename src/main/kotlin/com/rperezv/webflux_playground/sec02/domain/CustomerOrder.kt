@@ -8,7 +8,7 @@ import java.time.Instant
 data class CustomerOrder(
 
     @Id
-    val orderId: String? = null,
+    val id: String? = null,
     val customerId: String,
     val productId: String,
     val amount: Int,

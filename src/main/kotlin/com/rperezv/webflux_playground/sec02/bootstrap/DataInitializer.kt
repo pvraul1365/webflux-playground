@@ -8,7 +8,6 @@ import com.rperezv.webflux_playground.sec02.repository.CustomerRepository
 import com.rperezv.webflux_playground.sec02.repository.ProductRepository
 import mu.KLogging
 import org.springframework.boot.CommandLineRunner
-import org.springframework.stereotype.Component
 import reactor.core.publisher.Mono
 
 //@Component
