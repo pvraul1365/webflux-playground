@@ -13,7 +13,7 @@ object EntityDtoMapper {
         )
     }
 
-    fun toEntity(entity: Customer): CustomerDto {
+    fun toDto(entity: Customer): CustomerDto {
         return CustomerDto(
             id = entity.id,
             name = entity.name,

@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 data class Customer(
 
     @Id
-    val id: String? = null,
+    var id: String? = null,
     var name: String,
     var email: String
 
