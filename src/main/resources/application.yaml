@@ -1,6 +1,6 @@
 logging:
   level:
-    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
-    org.mongodb.driver: DEBUG
+    org.springframework.data.mongodb.core.MongoTemplate: ERROR
+    org.mongodb.driver: ERROR
   pattern:
     console: ${LOGPATTERN_CONSOLE:%green(%d{HH:mm:ss.SSS}) %blue(%-5level) %red([%thread]) %yellow(%logger{15}) - %msg%n}

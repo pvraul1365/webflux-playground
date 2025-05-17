@@ -27,12 +27,20 @@ class CustomerController(
     }
 
     @DeleteMapping(CUSTOMER_PATH_ID)
-    fun deleteCustomer(@PathVariable customerId: String): Mono<Void>
-            = customerService.deleteCustomerById(customerId)
+    fun deleteCustomer(@PathVariable customerId: String): Mono<ResponseEntity<Void>> {
+        return customerService.deleteCustomerById(customerId)
+            .filter { it }
+            .map { ResponseEntity.ok().build<Void>() }
+            .defaultIfEmpty(ResponseEntity.notFound().build())
+    }
 
     @PutMapping(CUSTOMER_PATH_ID)
-    fun updateCustomer(@PathVariable customerId: String, @RequestBody monoDto: Mono<CustomerDto>): Mono<CustomerDto>
+    fun updateCustomer(@PathVariable customerId: String, @RequestBody monoDto: Mono<CustomerDto>)
+                : Mono<ResponseEntity<CustomerDto>>
             = customerService.updateCustomer(customerId, monoDto)
+                .map { updateDto -> ResponseEntity.ok(updateDto) }
+                .defaultIfEmpty(ResponseEntity.notFound().build())
+
 
     @PostMapping(CUSTOMER_PATH)
     fun saveCustomer(@RequestBody monoDto: Mono<CustomerDto>): Mono<ResponseEntity<Void>> {
@@ -50,7 +58,11 @@ class CustomerController(
     fun allCustomers(): Flux<CustomerDto> = customerService.getAllCustomers()
 
     @GetMapping(CUSTOMER_PATH_ID)
-    fun getCustomer(@PathVariable customerId: String): Mono<CustomerDto>
-            = customerService.getCustomerById(customerId)
+    fun getCustomer(@PathVariable customerId: String): Mono<ResponseEntity<CustomerDto>> {
+
+        return customerService.getCustomerById(customerId)
+            .map { dto -> ResponseEntity.ok(dto) }
+            .defaultIfEmpty(ResponseEntity.notFound().build())
+    }
 
 }

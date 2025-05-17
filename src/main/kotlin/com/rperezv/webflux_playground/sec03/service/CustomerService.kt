@@ -3,7 +3,6 @@ package com.rperezv.webflux_playground.sec03.service
 import com.rperezv.webflux_playground.sec02.repository.CustomerRepository
 import com.rperezv.webflux_playground.sec03.dto.CustomerDto
 import com.rperezv.webflux_playground.sec03.mapper.EntityDtoMapper
-import kotlinx.coroutines.reactor.mono
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -31,6 +30,6 @@ class CustomerService(val customerRepository: CustomerRepository) {
             .map(EntityDtoMapper::toDto)
     }
 
-    fun deleteCustomerById(id: String): Mono<Void> = customerRepository.deleteById(id)
+    fun deleteCustomerById(id: String): Mono<Boolean> = customerRepository.deleteCustomerById(id)
 
 }
