@@ -2,6 +2,7 @@ package com.rperezv.webflux_playground.sec03.controller
 
 import com.rperezv.webflux_playground.sec03.dto.CustomerDto
 import com.rperezv.webflux_playground.sec03.service.CustomerService
+import org.springframework.data.domain.Page
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.util.UriComponentsBuilder
 import reactor.core.publisher.Flux
@@ -24,6 +26,11 @@ class CustomerController(
     companion object {
         const val CUSTOMER_PATH = "/customers"
         const val CUSTOMER_PATH_ID = "$CUSTOMER_PATH/{customerId}"
+    }
+
+    @GetMapping("$CUSTOMER_PATH/paginated")
+    fun allCustomers(@RequestParam(defaultValue = "1") page: Int, @RequestParam(defaultValue = "5") size: Int): Mono<Page<CustomerDto>> {
+        return customerService.getAllCustomers(page, size)
     }
 
     @DeleteMapping(CUSTOMER_PATH_ID)

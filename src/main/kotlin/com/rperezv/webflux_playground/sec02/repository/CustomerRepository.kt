@@ -2,6 +2,7 @@ package com.rperezv.webflux_playground.sec02.repository
 
 import com.rperezv.webflux_playground.sec02.domain.Customer
 import com.rperezv.webflux_playground.sec03.repository.CustomerRepositoryCustom
+import org.springframework.data.domain.Pageable
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
@@ -15,5 +16,7 @@ interface CustomerRepository : ReactiveMongoRepository<Customer, String>, Custom
     fun findByEmailEndingWith(email: String): Flux<Customer>
 
     fun findByName(name: String): Flux<Customer>
+
+    fun findBy(pageable: Pageable): Flux<Customer>
 
 }

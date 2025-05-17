@@ -23,3 +23,7 @@ curl -i \
 DELETE CUSTOMER:
 ================
 curl -i -X DELETE localhost:8080/api/v1/customers/682835e1dd2bcf7295c6ca56
+
+GET ALL CUSTOMERS PAGINATED:
+==================
+curl -i "localhost:8080/api/v1/customers/paginated?page=1&size=10"
