@@ -8,8 +8,8 @@ object EntityDtoMapper {
     fun toEntity(dto: CustomerDto): Customer {
         return Customer(
             id = dto.id,
-            name = dto.name,
-            email = dto.email
+            name = dto.name!!,
+            email = dto.email!!
         )
     }
 
