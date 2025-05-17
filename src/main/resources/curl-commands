@@ -1,0 +1,25 @@
+GET ALL CUSTOMERS:
+==================
+curl -i localhost:8080/api/v1/customers
+
+CREATE CUSTOMER:
+================
+curl -i \
+-d '{"id":null, "name":"hector", "email": "hector@gmail.com"}' \
+-H "Content-Type: application/json" \
+-X POST http://localhost:8080/api/v1/customers
+
+GET CUSTOMER:
+=============
+curl -i localhost:8080/api/v1/customers/682836363a739778ee5d9d9f
+
+UPDATE CUSTOMER:
+================
+curl -i \
+-d '{"id":null, "name":"peter", "email": "peter@gmail.com"}' \
+-H "Content-Type: application/json" \
+-X PUT http://localhost:8080/api/v1/customers/682836363a739778ee5d9d9f
+
+DELETE CUSTOMER:
+================
+curl -i -X DELETE localhost:8080/api/v1/customers/682835e1dd2bcf7295c6ca56

@@ -74,13 +74,13 @@ class DataInitializer(
                 val orders = listOf(
                     // Sam buys an iphone 20 & iphone 18
                     CustomerOrder(customerId = sam.id!!,  productId = iphone20.id!!, amount = 950),
-                    CustomerOrder(customerId = sam.id,  productId = iphone18.id!!, amount = 850),
+                    CustomerOrder(customerId = sam.id!!,  productId = iphone18.id!!, amount = 850),
                     // Mike buys iphone 20 & mac pro
                     CustomerOrder(customerId = mike.id!!, productId = iphone20.id, amount = 975),
-                    CustomerOrder(customerId = mike.id, productId = macpro.id!!, amount = 2999),
+                    CustomerOrder(customerId = mike.id!!, productId = macpro.id!!, amount = 2999),
                     // Jake buys iphone 18 & ipad
                     CustomerOrder(customerId = jake.id!!, productId = iphone18.id, amount = 750),
-                    CustomerOrder(customerId = jake.id, productId = ipad.id!!, amount = 775)
+                    CustomerOrder(customerId = jake.id!!, productId = ipad.id!!, amount = 775)
                 )
 
                 customerOrderRepository.saveAll(orders)
