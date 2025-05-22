@@ -1,12 +1,19 @@
 GET ALL CUSTOMERS:
 ==================
 curl -i localhost:8080/api/v1/customers
+curl -i -H "auth-token: secret123" localhost:8080/api/v1/customers/682836363a739778ee5d9d9f
 
 CREATE CUSTOMER:
 ================
 curl -i \
 -d '{"id":null, "name":"hector", "email": "hector@gmail.com"}' \
 -H "Content-Type: application/json" \
+-X POST http://localhost:8080/api/v1/customers
+
+curl -i \
+-d '{"id":null, "name":"hector", "email": "hector@gmail.com"}' \
+-H "Content-Type: application/json" \
+-H "auth-token: secret456" \
 -X POST http://localhost:8080/api/v1/customers
 
 GET CUSTOMER:
