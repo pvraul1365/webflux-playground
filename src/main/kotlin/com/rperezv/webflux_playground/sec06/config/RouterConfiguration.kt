@@ -18,7 +18,6 @@ class RouterConfiguration(
     fun customerRoutes(): RouterFunction<ServerResponse> {
         return RouterFunctions.route()
             .GET("/api/v2/customers",  customerRequestHandler::allCustomer)
-            .GET("/api/v2/customers/paginated",  customerRequestHandler::paginatedCustomer)
             .GET("/api/v2/customers/{customerId}",  customerRequestHandler::getCustomer)
             .POST("/api/v2/customers",  customerRequestHandler::saveCustomer)
             .PUT("/api/v2/customers/{customerId}",  customerRequestHandler::updateCustomer)

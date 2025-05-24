@@ -23,14 +23,6 @@ class CustomerRequestHandler(private val customerService: CustomerService) {
         */
     }
 
-    fun paginatedCustomer(request: ServerRequest): Mono<ServerResponse> {
-        val page = request.queryParam("page").map(Integer::parseInt).orElse(1)
-        val size = request.queryParam("size").map(Integer::parseInt).orElse(3)
-
-        return customerService.getAllCustomers(page, size)
-            .flatMap(ServerResponse.ok()::bodyValue)
-    }
-
     fun getCustomer(request: ServerRequest): Mono<ServerResponse> {
         val id = request.pathVariable("customerId")
 
