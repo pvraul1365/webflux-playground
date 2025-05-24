@@ -27,7 +27,7 @@ class Lec01MonoTest : AbstractWebClient() {
     fun concurrentRequestsGet() {
         for (i in 1 .. 100) {
             this.client.get()
-                .uri("/lec01/product/$i")
+                .uri("/{lec}/product/{id}", "lec01", i)
                 .retrieve()
                 .bodyToMono(Product::class.java)
                 .log()
