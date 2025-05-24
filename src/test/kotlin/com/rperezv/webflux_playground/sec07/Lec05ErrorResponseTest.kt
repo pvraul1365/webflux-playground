@@ -4,8 +4,10 @@ import com.rperezv.webflux_playground.sec07.dto.CalculatorResponse
 import mu.KLogging
 import org.junit.jupiter.api.Test
 import org.springframework.http.ProblemDetail
+import org.springframework.web.reactive.function.client.ClientResponse
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.WebClientResponseException
+import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.doOnError
 import reactor.test.StepVerifier
 
@@ -35,6 +37,33 @@ class Lec05ErrorResponseTest : AbstractWebClient() {
             .expectComplete()
             .verify()
 
+    }
+
+    @Test
+    fun exchange() {
+
+        this.client.get()
+            .uri("/{lec}/calculator/{a}/{b}", "lec05", 10, 20)
+            .header("operation", "+")
+            .exchangeToMono(this::decode)
+            .log()
+            .then()
+            .`as`(StepVerifier::create)
+            .expectComplete()
+            .verify()
+
+    }
+
+    private fun decode(clientResponse: ClientResponse): Mono<CalculatorResponse> {
+
+        logger.info("Status code: ${clientResponse.statusCode()}")
+        if (clientResponse.statusCode().isError) {
+            return clientResponse.bodyToMono(ProblemDetail::class.java)
+                .doOnNext { logger.info("$it") }
+                .then(Mono.empty())
+        }
+
+        return clientResponse.bodyToMono(CalculatorResponse::class.java)
     }
 
 }
