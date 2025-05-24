@@ -23,4 +23,19 @@ class Lec01MonoTest : AbstractWebClient() {
         Thread.sleep(Duration.ofSeconds(2))
     }
 
+    @Test
+    fun concurrentRequestsGet() {
+        for (i in 1 .. 100) {
+            this.client.get()
+                .uri("/lec01/product/$i")
+                .retrieve()
+                .bodyToMono(Product::class.java)
+                .log()
+                //.doOnNext (println())
+                .subscribe()
+        }
+
+        Thread.sleep(Duration.ofSeconds(2))
+    }
+
 }
