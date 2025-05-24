@@ -9,7 +9,7 @@ abstract class AbstractWebClient {
     companion object : KLogging()
 
     protected fun <T> println(): Consumer<T> {
-        return Consumer { item -> logger.info("received: ${item}") }
+        return Consumer { item -> logger.info("received: $item") }
     }
 
     protected fun createWebClient(): WebClient {
@@ -17,7 +17,7 @@ abstract class AbstractWebClient {
             This method simply calls the second method, passing an empty lambda function as an argument ({ b -> {}}),
             which does not modify the builder (It uses the default configuration of the WebClient.Builder)
          */
-        return createWebClient{ b -> {} }
+        return createWebClient{ _ ->  }
     }
 
     protected fun createWebClient(consumer: Consumer<WebClient.Builder>): WebClient {
