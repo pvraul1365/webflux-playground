@@ -17,12 +17,14 @@ class Lec09ExchangeFilterTest : AbstractWebClient() {
 
     private val client: WebClient = super.createWebClient {
             builder -> builder.filter(tokenGenerator())
+        .filter(requestLogger())
     }
 
     @Test
     fun exchangeFilter() {
         this.client.get()
             .uri("/{lec}/product/{id}", "lec09", 1)
+            .attribute("enable-logging", true )
             .retrieve()
             .bodyToMono(Product::class.java)
             .log()
