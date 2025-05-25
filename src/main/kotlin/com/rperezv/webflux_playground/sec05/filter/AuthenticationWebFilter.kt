@@ -10,7 +10,7 @@ import org.springframework.web.server.WebFilterChain
 import reactor.core.publisher.Mono
 
 @Order(1)
-@Service
+//@Service
 class AuthenticationWebFilter : WebFilter {
 
     companion object : KLogging() {

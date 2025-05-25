@@ -10,7 +10,7 @@ import org.springframework.web.server.WebFilterChain
 import reactor.core.publisher.Mono
 
 @Order(2)
-@Service
+//@Service
 class AuthorizationWebFilter : WebFilter {
 
     override fun filter(
