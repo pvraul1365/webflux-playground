@@ -22,4 +22,11 @@ class ProductClient {
             .bodyToMono(UploadResponse::class.java)
     }
 
+    fun downloadProducts(): Flux<ProductDto> {
+        return client.get()
+            .uri("/api/v3/products/download")
+            .accept(MediaType.APPLICATION_NDJSON)
+            .retrieve()
+            .bodyToFlux(ProductDto::class.java)
+    }
 }

@@ -5,7 +5,7 @@ import mu.KLogging
 import org.junit.jupiter.api.Test
 import reactor.core.publisher.Flux
 import reactor.test.StepVerifier
-import java.time.Duration
+import java.nio.file.Path
 
 class ProductsUploadDownloadTest {
 
@@ -16,11 +16,11 @@ class ProductsUploadDownloadTest {
     @Test
     fun upload() {
 
-        val flux = Flux.range(1, 10)
+        val flux = Flux.range(1, 1_000_000)
             .map { i ->
                 ProductDto(null, "product-$i", i)
             }
-            .delayElements(Duration.ofSeconds(2))
+            //.delayElements(Duration.ofSeconds(2))
 
         productClient.uploadProducts(flux)
             .doOnNext { response -> logger.info("received: $response") }
@@ -29,6 +29,16 @@ class ProductsUploadDownloadTest {
             .expectComplete()
             .verify()
 
+    }
+
+    @Test
+    fun download() {
+        productClient.downloadProducts()
+            .map(ProductDto::toString)
+            .`as`{ flux -> FileWriter(Path.of("products.txt")).create(flux) }
+            .`as`(StepVerifier::create)
+            .expectComplete()
+            .verify()
     }
 
 }

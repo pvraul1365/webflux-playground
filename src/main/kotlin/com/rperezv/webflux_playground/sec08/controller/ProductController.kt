@@ -5,6 +5,7 @@ import com.rperezv.webflux_playground.sec08.dto.UploadResponse
 import com.rperezv.webflux_playground.sec08.service.ProductService
 import mu.KLogging
 import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -29,5 +30,8 @@ class ProductController(
             ).then(service.getProductsCount())
             .map { count -> UploadResponse(UUID.randomUUID(), count) }
     }
+
+    @GetMapping("download", produces = [MediaType.APPLICATION_NDJSON_VALUE])
+    fun downloadProducts(): Flux<ProductDto> = service.allProducts()
 
 }

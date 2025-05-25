@@ -1,6 +1,7 @@
 package com.rperezv.webflux_playground.sec08.service
 
 import com.rperezv.webflux_playground.sec08.dto.ProductDto
+import com.rperezv.webflux_playground.sec08.entity.Product
 import com.rperezv.webflux_playground.sec08.mapper.EntityDtoMapper
 import com.rperezv.webflux_playground.sec08.repository.ProductRepository
 import org.springframework.stereotype.Service
@@ -22,4 +23,8 @@ class ProductService(
         return repository.count()
     }
 
+    fun allProducts(): Flux<ProductDto> {
+        return repository.findAll()
+            .map(EntityDtoMapper::toDto)
+    }
 }
