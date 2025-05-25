@@ -17,7 +17,7 @@ abstract class AbstractWebClient {
             This method simply calls the second method, passing an empty lambda function as an argument ({ b -> {}}),
             which does not modify the builder (It uses the default configuration of the WebClient.Builder)
          */
-        return createWebClient{ _ ->  }
+        return createWebClient { _ ->  }
     }
 
     protected fun createWebClient(consumer: Consumer<WebClient.Builder>): WebClient {
