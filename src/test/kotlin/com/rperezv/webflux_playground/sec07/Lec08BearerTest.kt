@@ -1,0 +1,27 @@
+package com.rperezv.webflux_playground.sec07
+
+import com.rperezv.webflux_playground.sec07.dto.Product
+import org.junit.jupiter.api.Test
+import org.springframework.web.reactive.function.client.WebClient
+import reactor.test.StepVerifier
+
+class Lec08BearerTest : AbstractWebClient() {
+
+    private val client: WebClient = super.createWebClient {
+        builder -> builder.defaultHeaders { headers -> headers.setBearerAuth("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9") }
+    }
+
+    @Test
+    fun bearerAuth() {
+        this.client.get()
+            .uri("/{lec}/product/{id}", "lec08", 1)
+            .retrieve()
+            .bodyToMono(Product::class.java)
+            .log()
+            .then()
+            .`as`(StepVerifier::create)
+            .expectComplete()
+            .verify()
+    }
+
+}
