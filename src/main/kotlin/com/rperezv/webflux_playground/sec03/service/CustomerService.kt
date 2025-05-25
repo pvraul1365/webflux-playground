@@ -2,7 +2,7 @@ package com.rperezv.webflux_playground.sec03.service
 
 import com.rperezv.webflux_playground.sec02.repository.CustomerRepository
 import com.rperezv.webflux_playground.sec03.dto.CustomerDto
-import com.rperezv.webflux_playground.sec03.mapper.EntityDtoMapper
+import com.rperezv.webflux_playground.sec08.mapper.EntityDtoMapper
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono
 class CustomerService(val customerRepository: CustomerRepository) {
 
     fun getAllCustomers(page: Int, size: Int): Mono<Page<CustomerDto>> {
-        var pageRequest = PageRequest.of(page -1, size)
+        val pageRequest = PageRequest.of(page -1, size)
         return customerRepository.findBy(pageRequest)
             .map(EntityDtoMapper::toDto)
             .collectList()

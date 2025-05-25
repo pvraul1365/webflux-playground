@@ -1,6 +1,6 @@
-package com.rperezv.webflux_playground.sec02.repository
+package com.rperezv.webflux_playground.sec08.repository
 
-import com.rperezv.webflux_playground.sec02.domain.Product
+import com.rperezv.webflux_playground.sec08.entity.Product
 import org.springframework.data.domain.Pageable
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository
 import org.springframework.stereotype.Repository

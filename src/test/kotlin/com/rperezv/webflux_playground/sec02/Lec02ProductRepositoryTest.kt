@@ -1,6 +1,6 @@
 package com.rperezv.webflux_playground.sec02
 
-import com.rperezv.webflux_playground.sec02.repository.ProductRepository
+import com.rperezv.webflux_playground.sec08.repository.ProductRepository
 import mu.KLogging
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test

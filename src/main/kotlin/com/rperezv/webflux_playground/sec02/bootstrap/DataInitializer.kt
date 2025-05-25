@@ -2,10 +2,10 @@ package com.rperezv.webflux_playground.sec02.bootstrap
 
 import com.rperezv.webflux_playground.sec02.domain.Customer
 import com.rperezv.webflux_playground.sec02.domain.CustomerOrder
-import com.rperezv.webflux_playground.sec02.domain.Product
+import com.rperezv.webflux_playground.sec08.entity.Product
 import com.rperezv.webflux_playground.sec02.repository.CustomerOrderRepository
 import com.rperezv.webflux_playground.sec02.repository.CustomerRepository
-import com.rperezv.webflux_playground.sec02.repository.ProductRepository
+import com.rperezv.webflux_playground.sec08.repository.ProductRepository
 import mu.KLogging
 import org.springframework.boot.CommandLineRunner
 import reactor.core.publisher.Mono

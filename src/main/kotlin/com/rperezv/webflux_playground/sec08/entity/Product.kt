@@ -1,4 +1,4 @@
-package com.rperezv.webflux_playground.sec02.domain
+package com.rperezv.webflux_playground.sec08.entity
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
