@@ -2,7 +2,7 @@ package com.rperezv.webflux_playground.sec08.controller
 
 import com.rperezv.webflux_playground.sec08.dto.ProductDto
 import com.rperezv.webflux_playground.sec08.dto.UploadResponse
-import com.rperezv.webflux_playground.sec08.service.ProductService
+import com.rperezv.webflux_playground.sec09.service.ProductService
 import mu.KLogging
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.GetMapping
