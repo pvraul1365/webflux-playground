@@ -1,4 +1,4 @@
-package com.rperezv.webflux_playground.sec08.controller
+package com.rperezv.webflux_playground.sec09.config
 
 import com.rperezv.webflux_playground.sec08.dto.ProductDto
 import com.rperezv.webflux_playground.sec08.dto.UploadResponse
@@ -21,6 +21,13 @@ class ProductController(
 ) {
 
     companion object : KLogging()
+
+    @PostMapping
+    fun saveProduct(@RequestBody mono: Mono<ProductDto>): Mono<ProductDto> = service.saveProduct(mono)
+
+    @GetMapping("stream", produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
+    fun productStream(): Flux<ProductDto> = service.productStream()
+
 
     @PostMapping("upload", consumes = [MediaType.APPLICATION_NDJSON_VALUE])
     fun uploadProducts(@RequestBody flux: Flux<ProductDto>) : Mono<UploadResponse> {
