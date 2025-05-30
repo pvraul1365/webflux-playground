@@ -26,7 +26,7 @@ class ProductController(
     @PostMapping
     fun saveProduct(@RequestBody mono: Mono<ProductDto>): Mono<ProductDto> = service.saveProduct(mono)
 
-    @GetMapping("stream/{maxPRice}", produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
+    @GetMapping("stream/{maxPrice}", produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
     fun productStream(@PathVariable maxPrice: Int): Flux<ProductDto> {
         return service.productStream()
             .filter { dto -> dto.price <= maxPrice  }
