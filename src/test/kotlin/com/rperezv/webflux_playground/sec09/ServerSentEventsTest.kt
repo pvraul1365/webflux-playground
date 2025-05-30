@@ -1,7 +1,6 @@
 package com.rperezv.webflux_playground.sec09
 
 import com.rperezv.webflux_playground.sec08.dto.ProductDto
-import com.rperezv.webflux_playground.sec08.entity.Product
 import mu.KLogging
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
