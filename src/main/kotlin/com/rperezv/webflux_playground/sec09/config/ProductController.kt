@@ -6,6 +6,7 @@ import com.rperezv.webflux_playground.sec09.service.ProductService
 import mu.KLogging
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -25,9 +26,11 @@ class ProductController(
     @PostMapping
     fun saveProduct(@RequestBody mono: Mono<ProductDto>): Mono<ProductDto> = service.saveProduct(mono)
 
-    @GetMapping("stream", produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
-    fun productStream(): Flux<ProductDto> = service.productStream()
-
+    @GetMapping("stream/{maxPRice}", produces = [MediaType.TEXT_EVENT_STREAM_VALUE])
+    fun productStream(@PathVariable maxPrice: Int): Flux<ProductDto> {
+        return service.productStream()
+            .filter { dto -> dto.price <= maxPrice  }
+    }
 
     @PostMapping("upload", consumes = [MediaType.APPLICATION_NDJSON_VALUE])
     fun uploadProducts(@RequestBody flux: Flux<ProductDto>) : Mono<UploadResponse> {
