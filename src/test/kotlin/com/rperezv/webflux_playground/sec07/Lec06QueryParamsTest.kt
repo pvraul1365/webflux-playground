@@ -1,6 +1,7 @@
 package com.rperezv.webflux_playground.sec07
 
-import com.rperezv.webflux_playground.sec07.dto.CalculatorResponse
+import com.rperezv.webflux_playground.sec10.dto.CalculatorResponse
+import com.rperezv.webflux_playground.sec07.AbstractWebClient
 import org.junit.jupiter.api.Test
 import org.springframework.web.reactive.function.client.WebClient
 import reactor.test.StepVerifier

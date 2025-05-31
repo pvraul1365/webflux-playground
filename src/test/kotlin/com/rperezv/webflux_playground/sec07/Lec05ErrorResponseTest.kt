@@ -1,6 +1,7 @@
 package com.rperezv.webflux_playground.sec07
 
-import com.rperezv.webflux_playground.sec07.dto.CalculatorResponse
+import com.rperezv.webflux_playground.sec10.dto.CalculatorResponse
+import com.rperezv.webflux_playground.sec07.AbstractWebClient
 import mu.KLogging
 import org.junit.jupiter.api.Test
 import org.springframework.http.ProblemDetail
