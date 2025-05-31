@@ -1,18 +1,15 @@
 package com.rperezv.webflux_playground.sec10
 
-import com.rperezv.webflux_playground.sec10.AbstractWebClient
 import com.rperezv.webflux_playground.sec10.dto.Product
-import kotlinx.coroutines.newFixedThreadPoolContext
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.http.client.reactive.ReactorClientHttpConnector
 import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
+import reactor.netty.http.client.HttpClient
 import reactor.netty.resources.ConnectionProvider
 import reactor.test.StepVerifier
-import reactor.netty.http.client.HttpClient
-import java.time.Duration
 
 class Lec01HttpConnectionPoolingTest : AbstractWebClient() {
 
